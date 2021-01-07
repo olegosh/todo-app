@@ -1,9 +1,10 @@
 import React from 'react';
+import Logo from './Logo';
 
 export const App = () => {
     return (
         <div className="container">
-            <h1>ToDo App</h1>
+            <Logo />
         </div>
     );
 }

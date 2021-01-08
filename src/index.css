@@ -8,6 +8,10 @@
     color: #fff !important;
 }
 
+.list-item-text {
+    font-size: 1.2em !important;
+}
+
 .list-item-button {
     color: #000 !important;
     margin-top: -8px !important;
@@ -38,6 +42,24 @@
     border: 1px solid red !important;
 }
 
+.hight-priority {
+    text-transform: uppercase;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: grey;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
 #search-inline, #add-inline {
     color: #fff !important;
     border: 1px solid #fff !important;
@@ -57,7 +79,7 @@
         right: 0 !important;
         visibility: visible !important;
         display: block !important;
-        background-color: rgba(0, 0, 0, 0.8) !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
         z-index: 999 !important;
     }
 

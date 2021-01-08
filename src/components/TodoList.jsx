@@ -1,13 +1,22 @@
 import React from 'react';
 import { TodoItem } from './TodoItem';
 
-export const TodoList = () => {
+export const TodoList = ({ items: { tasks } = {} }) => {
     return (
         <div>
             <ul className="collection">
-                <TodoItem text="Drink tea" />
-                <TodoItem text="Learn React" />
-                <TodoItem text="Make awesome SPA" />
+                {
+                    tasks.map((task) => {
+                        return (
+                            <TodoItem
+                                text={task.text}
+                                key={task.id}
+                                isCompleted={task.completed}
+                                isHighPriority={task.highPriority}
+                            />
+                        )
+                    })
+                }
             </ul>
         </div>
     );

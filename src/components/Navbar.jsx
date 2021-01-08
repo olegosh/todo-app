@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './Button';
 
-export const Navbar = () => {
+export const Navbar = ({ filter, handleFiltration }) => {
+    const [currentFilter, setCurrentFilter] = useState(filter);
+    const changeFilter = (newFilter) => {
+        setCurrentFilter(newFilter);
+
+        //give changed to top by calling function in destruct. props
+        handleFiltration(newFilter);
+    };
+
     return (
         <div className="col s12">
             <nav>
@@ -16,9 +24,27 @@ export const Navbar = () => {
                     </div>
                     <div className="cols s3">
                         <ul id="nav-mobile" className="right button-set-top hide-on-small-only">
-                            <li><Button text="All" isActive /></li>
-                            <li><Button text="Active" /></li>
-                            <li><Button text="Done" /></li>
+                            <li>
+                                <Button
+                                    text="All"
+                                    isActive={currentFilter === 'All'}
+                                    handleButtonClick={changeFilter}
+                                />
+                            </li>
+                            <li>
+                                <Button
+                                    text="Active"
+                                    isActive={currentFilter === 'Active'}
+                                    handleButtonClick={changeFilter}
+                                />
+                            </li>
+                            <li>
+                                <Button
+                                    text="Done"
+                                    isActive={currentFilter === 'Done'}
+                                    handleButtonClick={changeFilter}
+                                />
+                            </li>
                         </ul>
                     </div>
                 </div>

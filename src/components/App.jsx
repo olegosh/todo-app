@@ -37,6 +37,13 @@ export const App = () => {
         filterTodoList(currentFilter);
     };
 
+    const toggleCompleted = (toggleId) => {
+        console.log('toggling ', toggleId);
+        const taskToToggle = filteredTodo.tasks.find(({ id }) => id === toggleId);
+        taskToToggle.completed = !taskToToggle.completed;
+        setFiltration(filter);
+    }
+
     // const stored = JSON.parse(localStorage.getItem(STORAGE_NAME));
     // const todo = stored || { tasks: DEFAULT_TASKS };
     
@@ -61,7 +68,7 @@ export const App = () => {
                 <div className="container">
                     <Logo />
                     <Navbar filter={filter} handleFiltration={setFiltration} />
-                    <TodoList items={filteredTodo} />
+                    <TodoList items={filteredTodo} handleClickTodo={toggleCompleted} />
                     <TodoItemCreator />
                 </div>
             }

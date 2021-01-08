@@ -1,15 +1,18 @@
 import React from 'react';
 
-const Logo = () => {
+export const Logo = () => {
     return (
-        <div>
+        <div className="col s12">
             <nav>
-                <div class="nav-wrapper">
-                    <span class="brand-logo p3">ToDo App</span>
+                <div className="nav-wrapper green darken-3 row">
+                    {/* event_note */}
+
+                    <span className="brand-logo">
+                        <i className="material-icons">event_note</i>
+                        ToDo App
+                    </span>
                 </div>
             </nav>
         </div>
     );
 }
-
-export default Logo;

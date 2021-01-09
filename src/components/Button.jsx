@@ -1,7 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export const Button = ({ text, isActive, isListItemButton, icon, isHighPriority, isCompleted, handleButtonClick }) => {
+export const Button = ({
+        text,
+        isActive,
+        isListItemButton,
+        icon,
+        isHighPriority,
+        isCompleted,
+        handleButtonClick,
+        isDelete,
+        isImportant,
+        handleDeleteClick,
+        handleImportantClick
+    }) => {
     const elementClasses = classNames({
         'select-button waves-effect waves-teal btn-flat': true,
         'button-active': isActive,
@@ -15,11 +27,23 @@ export const Button = ({ text, isActive, isListItemButton, icon, isHighPriority,
 
     const iconElement = <i className="material-icons">{icon}</i>;
 
+    const selectHandleButtonClick = () => {
+        if (!isDelete && !isImportant) {
+            handleButtonClick(text);
+        }
+        if (isDelete) {
+            handleDeleteClick();
+        }
+        if (isImportant) {
+            handleImportantClick();
+        }
+    };
+
     return (
         <span
             id="btn-all"
             className={elementClasses}
-            onClick={() => handleButtonClick(text)}
+            onClick={selectHandleButtonClick}
         >
             { text }
             { icon ? iconElement : null }

@@ -1,7 +1,12 @@
 import React from 'react';
 import { TodoItem } from './TodoItem';
 
-export const TodoList = ({ items: { tasks } = {}, handleClickTodo }) => {
+export const TodoList = ({
+    items: { tasks } = {},
+    handleClickTodo,
+    handleDeleteTodoItem,
+    handleImportantTodoItem
+}) => {
 
     // const forwardClick = (e) => handleClickTodo(e);
 
@@ -17,7 +22,9 @@ export const TodoList = ({ items: { tasks } = {}, handleClickTodo }) => {
                                 id={task.id}
                                 isCompleted={task.completed}
                                 isHighPriority={task.highPriority}
-                                handleClick={handleClickTodo}
+                                handleTextClick={handleClickTodo}
+                                handleDeleteClick={handleDeleteTodoItem}
+                                handleImportantClick={handleImportantTodoItem}
                             />
                         )
                     })

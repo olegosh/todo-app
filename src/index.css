@@ -12,6 +12,10 @@
     font-size: 1.2em !important;
 }
 
+.list-item-text:hover {
+    cursor: pointer;
+}
+
 .list-item-button {
     color: #000 !important;
     margin-top: -8px !important;

@@ -2,7 +2,18 @@ import React from 'react';
 import { Button } from './Button';
 import classNames from 'classnames';
 
-export const TodoItem = ({ text, id, isHighPriority, isCompleted, handleClick }) => {
+export const TodoItem = ({
+    text,
+    id,
+    isHighPriority,
+    isCompleted,
+    handleTextClick,
+    handleDeleteClick,
+    handleImportantClick
+}) => {
+    const handleDeletion = () => handleDeleteClick(id);
+    const handleImportance = () => handleImportantClick(id);
+    
     const elementClasses = classNames({
         'list-item-text': true,
         'hight-priority': isHighPriority,
@@ -13,7 +24,7 @@ export const TodoItem = ({ text, id, isHighPriority, isCompleted, handleClick })
         <span
             id={id}
             className={elementClasses}
-            onClick={() => handleClick(id)}
+            onClick={() => handleTextClick(id)}
         >
             {text}
         </span>
@@ -22,8 +33,18 @@ export const TodoItem = ({ text, id, isHighPriority, isCompleted, handleClick })
     return (
         <li className="collection-item">
             { textElement }
-            <Button isListItemButton icon="priority_high" />
-            <Button isListItemButton icon="delete_forever" />
+            <Button
+                isListItemButton
+                icon="priority_high"
+                isImportant
+                handleImportantClick={handleImportance}
+                />
+            <Button
+                isListItemButton
+                icon="delete_forever"
+                isDelete
+                handleDeleteClick={handleDeletion}
+            />
         </li>
     );
 }

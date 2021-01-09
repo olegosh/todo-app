@@ -70,6 +70,19 @@ export const App = () => {
         }
     }
 
+    const addNewTodoItem = (text) => {
+        const newTodoItem = {
+            highPriority: false,
+            completed: false,
+            text,
+            id: generateId()
+        }
+        todo.tasks.push(newTodoItem);
+        setDataInStore(todo.tasks);
+        setFiltration(filter);
+        console.log('Added todo item ', newTodoItem);
+    };
+
     // const stored = JSON.parse(localStorage.getItem(STORAGE_NAME));
     // const todo = stored || { tasks: DEFAULT_TASKS };
     
@@ -115,7 +128,7 @@ export const App = () => {
                         handleDeleteTodoItem={deleteTodoListItem}
                         handleImportantTodoItem={toggleImportance}
                     />
-                    <TodoItemCreator />
+                    <TodoItemCreator handleAddition={addNewTodoItem} />
                 </div>
             }
         </>

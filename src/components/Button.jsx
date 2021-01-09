@@ -12,7 +12,9 @@ export const Button = ({
         isDelete,
         isImportant,
         handleDeleteClick,
-        handleImportantClick
+        handleImportantClick,
+        isAdd,
+        handleAddClick
     }) => {
     const elementClasses = classNames({
         'select-button waves-effect waves-teal btn-flat': true,
@@ -28,7 +30,7 @@ export const Button = ({
     const iconElement = <i className="material-icons">{icon}</i>;
 
     const selectHandleButtonClick = () => {
-        if (!isDelete && !isImportant) {
+        if (!isDelete && !isImportant && !isAdd) {
             handleButtonClick(text);
         }
         if (isDelete) {
@@ -36,6 +38,9 @@ export const Button = ({
         }
         if (isImportant) {
             handleImportantClick();
+        }
+        if (isAdd) {
+            handleAddClick();
         }
     };
 

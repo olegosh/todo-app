@@ -88,7 +88,7 @@ export const App = () => {
         console.log('Added todo item ', newTodoItem);
     };
 
-    const searchTodoItem = (searchText) => {
+    const searchTodoItem = (searchText, filter) => {
         // addNewTodoItem();
         const storedTodo = JSON.parse(localStorage.getItem(STORAGE_NAME));
         setTodo(storedTodo);

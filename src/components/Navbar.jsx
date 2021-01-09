@@ -12,7 +12,7 @@ export const Navbar = ({ filter, handleFiltration, handleSearch }) => {
         //set searched
         const text = document.getElementById('search-inline').value;
         if (text) {
-            handleSearch(text);
+            handleSearch(text, newFilter);
         }
     };
 

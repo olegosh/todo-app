@@ -47,6 +47,7 @@ export const App = () => {
             taskToToggle.completed = !taskToToggle.completed;
             setFiltration(filter);
         }
+        setToggledTask(toggleId, taskToToggle);
     }
 
     const toggleImportance = (toggleId) => {
@@ -56,7 +57,18 @@ export const App = () => {
             taskToToggle.highPriority = !taskToToggle.highPriority;
             setFiltration(filter);
         }
+        setToggledTask(toggleId, taskToToggle);
     }
+
+    const setToggledTask = (toggleId, taskToToggle) => {
+        const storedTodo = JSON.parse(localStorage.getItem(STORAGE_NAME));
+        console.log('STORED', storedTodo.tasks);
+        console.log('TASK', taskToToggle);
+        const indexOfTaskToSet = storedTodo.tasks.findIndex(({ id }) => id === toggleId);
+        const newStoredTasks = [...storedTodo.tasks];
+        newStoredTasks.splice(indexOfTaskToSet, 1, taskToToggle);
+        setDataInStore(newStoredTasks);
+    };
 
     const deleteTodoListItem = (deleteId) => {
         console.log('deleting todo list item ', deleteId);

@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
 
-export const Navbar = ({ filter, handleFiltration }) => {
+export const Navbar = ({ filter, handleFiltration, handleSearch }) => {
     const [currentFilter, setCurrentFilter] = useState(filter);
     const changeFilter = (newFilter) => {
         setCurrentFilter(newFilter);
 
         //give changed to top by calling function in destruct. props
         handleFiltration(newFilter);
+
+        //set searched
+        const text = document.getElementById('search-inline').value;
+        if (text) {
+            handleSearch(text);
+        }
+    };
+
+    const handleChange = (event) => {
+        const text = event.target.value;
+        handleSearch(text);
     };
 
     return (
@@ -20,6 +31,7 @@ export const Navbar = ({ filter, handleFiltration }) => {
                             type="text"
                             className="validate"
                             placeholder="type to search"
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="cols s3">

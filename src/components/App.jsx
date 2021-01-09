@@ -15,9 +15,11 @@ export const App = () => {
     const STORAGE_NAME = 'todoStorage';
 
     const [filter, setFilter] = useState('All');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [todo, setTodo] = useState({ tasks: DEFAULT_TASKS });
     const [filteredTodo, setFilteredTodo] = useState({ tasks: DEFAULT_TASKS });
+    const [displayedTodo, setDisplayedTodo] = useState({ tasks: DEFAULT_TASKS });
+    const [search, setSearch] = useState(false);
 
     const filterTodoList = (type) => {
         //All, Active, Done
@@ -71,16 +73,39 @@ export const App = () => {
     }
 
     const addNewTodoItem = (text) => {
-        const newTodoItem = {
-            highPriority: false,
-            completed: false,
-            text,
-            id: generateId()
+        let newTodoItem;
+        if (text) {
+            newTodoItem = {
+                highPriority: false,
+                completed: false,
+                text,
+                id: generateId()
+            }
+            todo.tasks.push(newTodoItem);
         }
-        todo.tasks.push(newTodoItem);
         setDataInStore(todo.tasks);
         setFiltration(filter);
         console.log('Added todo item ', newTodoItem);
+    };
+
+    const searchTodoItem = (searchText) => {
+        // addNewTodoItem();
+        const storedTodo = JSON.parse(localStorage.getItem(STORAGE_NAME));
+        setTodo(storedTodo);
+        setFilteredTodo(storedTodo);
+        setFiltration(filter);
+        console.log('searching by ', searchText);
+        console.log(filteredTodo);
+        let filtered = todo.tasks
+            .filter(({ text }) => (text.toUpperCase()).includes(searchText.toUpperCase()));
+        console.log('filter', filter);
+        if (filter === 'Active') {
+            filtered = filtered.filter((task) => !task.completed);
+        }
+        if (filter === 'Done') {
+            filtered = filtered.filter((task) => task.completed);
+        }
+        setFilteredTodo({ tasks: filtered });
     };
 
     // const stored = JSON.parse(localStorage.getItem(STORAGE_NAME));
@@ -88,7 +113,7 @@ export const App = () => {
     
     const getDataFromStore = useCallback(
         () => {
-            setLoading(true);
+            // setLoading(true);
             console.log('getting data...', JSON.parse(localStorage.getItem(STORAGE_NAME)));
             const storedTodo = JSON.parse(localStorage.getItem(STORAGE_NAME)) || { tasks: DEFAULT_TASKS };
             console.log(storedTodo);
@@ -96,7 +121,7 @@ export const App = () => {
             console.log('todo', todo);
             setFiltration(filter);
             // filterTodoList(filter);
-            setTimeout(() => document.getElementById('btn-all').click());
+            setTimeout(() => document.getElementById('All').click());
             setLoading(false);
         },
         [DEFAULT_TASKS, setFiltration, todo]
@@ -119,9 +144,16 @@ export const App = () => {
             {
                 loading ?
                 <Loader /> :
-                <div className="container">
-                    <Logo />
-                    <Navbar filter={filter} handleFiltration={setFiltration} />
+                (<div className="container">
+                    <Logo
+                        doneCounter={(todo.tasks.filter((task) => task.completed)).length}
+                        todoCounter={todo.tasks.length - (todo.tasks.filter((task) => task.completed)).length}
+                    />
+                    <Navbar
+                        filter={filter}
+                        handleFiltration={setFiltration}
+                        handleSearch={searchTodoItem}
+                    />
                     <TodoList
                         items={filteredTodo}
                         handleClickTodo={toggleCompleted}
@@ -129,7 +161,7 @@ export const App = () => {
                         handleImportantTodoItem={toggleImportance}
                     />
                     <TodoItemCreator handleAddition={addNewTodoItem} />
-                </div>
+                </div>)
             }
         </>
     );

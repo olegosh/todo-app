@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { generateId } from '../utils/utils';
 
 export const Button = ({
         text,
@@ -46,7 +47,7 @@ export const Button = ({
 
     return (
         <span
-            id="btn-all"
+            id={text || generateId()}
             className={elementClasses}
             onClick={selectHandleButtonClick}
         >

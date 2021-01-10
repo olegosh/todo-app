@@ -88,7 +88,6 @@ export const App = () => {
     };
 
     const searchTodoItem = (searchText, filter) => {
-        // addNewTodoItem();
         const storedTodo = JSON.parse(localStorage.getItem(STORAGE_NAME));
         setTodo(storedTodo);
         setFilteredTodo(storedTodo);

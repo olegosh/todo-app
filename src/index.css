@@ -1,3 +1,97 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
+.brand-logo {
+    padding-left: 15px !important;
+}
 
+.select-button {
+    color: #fff !important;
+}
+
+.list-item-text {
+    font-size: 1.2em !important;
+}
+
+.list-item-text:hover {
+    cursor: pointer !important;
+}
+
+.list-item-button {
+    color: #000 !important;
+    margin-top: -8px !important;
+    margin-right: 5px !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.select-button:focus {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.button-active {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.button-inactive {
+    background-color: transparent !important;
+}
+
+.button-green {
+    border: 1px solid green !important;
+}
+
+.button-red {
+    border: 1px solid red !important;
+}
+
+.hight-priority {
+    text-transform: uppercase !important;
+    color: #2e7d32 !important;
+    font-weight: bold !important;
+}
+
+.completed {
+    text-decoration: line-through !important;
+    color: grey !important;
+}
+
+.loader {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    margin-top: 100px !important;
+}
+
+#search-inline, #add-inline {
+    color: #fff !important;
+    border: 1px solid #fff !important;
+    box-shadow: 0 1px 0 0 #fff !important;
+    margin-left: 15px !important;
+    padding-left: 5px !important;
+}
+
+#search-inline:focus, #add-inline:focus {
+    border: 1px solid #26a69a !important;
+    box-shadow: 0 1px 0 0 #26a69a !important;
+}
+
+@media screen and (max-width: 690px) {
+    .button-set-top, .button-set-bottom {
+        position: fixed !important;
+        right: 0 !important;
+        visibility: visible !important;
+        display: block !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
+        z-index: 999 !important;
+    }
+
+    .button-set-top {
+        top: 0 !important;
+    }
+
+    .button-set-bottom {
+        bottom: 0 !important;
+    }
+}

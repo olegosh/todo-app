@@ -10,6 +10,7 @@
 
 # production
 /build
+/public
 
 # misc
 .DS_Store
@@ -24,3 +25,9 @@ yarn-error.log*
 
 #eslint
 .eslintcache
+
+#firebase deploy
+.firebaserc
+.github/
+firebase.json
+.firebase/

@@ -8,8 +8,6 @@ export const TodoList = ({
     handleImportantTodoItem
 }) => {
 
-    // const forwardClick = (e) => handleClickTodo(e);
-
     return (
         <div>
             <ul className="collection">

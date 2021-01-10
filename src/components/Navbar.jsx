@@ -5,11 +5,8 @@ export const Navbar = ({ filter, handleFiltration, handleSearch }) => {
     const [currentFilter, setCurrentFilter] = useState(filter);
     const changeFilter = (newFilter) => {
         setCurrentFilter(newFilter);
-
-        //give changed to top by calling function in destruct. props
         handleFiltration(newFilter);
 
-        //set searched
         const text = document.getElementById('search-inline').value;
         if (text) {
             handleSearch(text, newFilter);

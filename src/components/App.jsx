@@ -18,11 +18,8 @@ export const App = () => {
     const [loading, setLoading] = useState(true);
     const [todo, setTodo] = useState({ tasks: DEFAULT_TASKS });
     const [filteredTodo, setFilteredTodo] = useState({ tasks: DEFAULT_TASKS });
-    const [displayedTodo, setDisplayedTodo] = useState({ tasks: DEFAULT_TASKS });
-    const [search, setSearch] = useState(false);
 
     const filterTodoList = (type) => {
-        //All, Active, Done
         let filtered = [...todo.tasks];
         if (type === 'Active') {
             filtered = todo.tasks.filter((task) => !task.completed);
@@ -35,13 +32,10 @@ export const App = () => {
 
     const setFiltration = (currentFilter) => {
         setFilter(currentFilter);
-        // console.log('filter', filter);
-        // console.log('currentFilter', currentFilter);
         filterTodoList(currentFilter);
     };
 
     const toggleCompleted = (toggleId) => {
-        console.log('toggling completion ', toggleId);
         const taskToToggle = filteredTodo.tasks.find(({ id }) => id === toggleId);
         if (taskToToggle) {
             taskToToggle.completed = !taskToToggle.completed;
@@ -51,7 +45,6 @@ export const App = () => {
     }
 
     const toggleImportance = (toggleId) => {
-        console.log('toggling importance ', toggleId);
         const taskToToggle = filteredTodo.tasks.find(({ id }) => id === toggleId);
         if (taskToToggle) {
             taskToToggle.highPriority = !taskToToggle.highPriority;
@@ -62,8 +55,6 @@ export const App = () => {
 
     const setToggledTask = (toggleId, taskToToggle) => {
         const storedTodo = JSON.parse(localStorage.getItem(STORAGE_NAME));
-        console.log('STORED', storedTodo.tasks);
-        console.log('TASK', taskToToggle);
         const indexOfTaskToSet = storedTodo.tasks.findIndex(({ id }) => id === toggleId);
         const newStoredTasks = [...storedTodo.tasks];
         newStoredTasks.splice(indexOfTaskToSet, 1, taskToToggle);
@@ -71,14 +62,11 @@ export const App = () => {
     };
 
     const deleteTodoListItem = (deleteId) => {
-        console.log('deleting todo list item ', deleteId);
         const indexOfTaskToDelete = filteredTodo.tasks.findIndex(({ id }) => id === deleteId);
         if (indexOfTaskToDelete !== -1) {
             todo.tasks.splice(indexOfTaskToDelete, 1);
             const changedTasks = todo.tasks;
             setTodo({ tasks: changedTasks });
-            //TODO set in storage
-            console.log('todo after deletion', todo.tasks);
             setDataInStore(todo.tasks);
             setFiltration(filter);
         }
@@ -97,7 +85,6 @@ export const App = () => {
         }
         setDataInStore(todo.tasks);
         setFiltration(filter);
-        console.log('Added todo item ', newTodoItem);
     };
 
     const searchTodoItem = (searchText, filter) => {
@@ -106,11 +93,8 @@ export const App = () => {
         setTodo(storedTodo);
         setFilteredTodo(storedTodo);
         setFiltration(filter);
-        console.log('searching by ', searchText);
-        console.log(filteredTodo);
         let filtered = todo.tasks
             .filter(({ text }) => (text.toUpperCase()).includes(searchText.toUpperCase()));
-        console.log('filter', filter);
         if (filter === 'Active') {
             filtered = filtered.filter((task) => !task.completed);
         }
@@ -119,20 +103,12 @@ export const App = () => {
         }
         setFilteredTodo({ tasks: filtered });
     };
-
-    // const stored = JSON.parse(localStorage.getItem(STORAGE_NAME));
-    // const todo = stored || { tasks: DEFAULT_TASKS };
     
     const getDataFromStore = useCallback(
         () => {
-            // setLoading(true);
-            console.log('getting data...', JSON.parse(localStorage.getItem(STORAGE_NAME)));
             const storedTodo = JSON.parse(localStorage.getItem(STORAGE_NAME)) || { tasks: DEFAULT_TASKS };
-            console.log(storedTodo);
             setTodo(storedTodo);
-            console.log('todo', todo);
             setFiltration(filter);
-            // filterTodoList(filter);
             setTimeout(() => document.getElementById('All').click());
             setLoading(false);
         },
@@ -150,7 +126,6 @@ export const App = () => {
 
     useEffect(() => getDataFromStore(), []);
 
-    console.log(filteredTodo);
     return (
         <>
             {
